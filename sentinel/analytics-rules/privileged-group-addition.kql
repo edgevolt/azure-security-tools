@@ -1,0 +1,4 @@
+AuditLogs
+| where OperationName == "Add member to role"
+| where TargetResources[0].modifiedProperties[1].newValue contains "Global Administrator"
+| project TimeGenerated, InitiatedBy = Identity, TargetUser = TargetResources[0].userPrincipalName

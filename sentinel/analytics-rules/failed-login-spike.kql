@@ -1,0 +1,5 @@
+SigninLogs
+| where TimeGenerated > ago(15m)
+| where ResultType != "0" 
+| summarize FailedAttempts = count(), DistinctIPs = dcount(IPAddress) by UserPrincipalName
+| where FailedAttempts >= 20

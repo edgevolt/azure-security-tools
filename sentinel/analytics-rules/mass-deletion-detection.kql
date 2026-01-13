@@ -1,0 +1,5 @@
+AzureActivity
+| where TimeGenerated > ago(1h)
+| where OperationNameValue contains "delete" and ActivityStatusValue == "Succeeded"
+| summarize DeleteCount = count() by Caller
+| where DeleteCount >= 10
